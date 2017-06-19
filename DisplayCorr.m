@@ -9,7 +9,7 @@ cols1 = size(im1,2);
 result = image3;
 [values, indexs] = sort(dist_vals);
 for i = 1 : x
-   position = [matches(indexs(i),1) matches(indexs(i),2) ; matches(indexs(i),3)+cols1 matches(indexs(i),4)];
+   position = [matches(1, indexs(i)) matches(2, indexs(i)) ; matches(3, indexs(i))+cols1 matches(4, indexs(i))];
    result = insertText(result,position,i,'FontSize',18, ...
        'TextColor','red', 'BoxOpacity',0);
    displayedCorr(i) = matches(i);

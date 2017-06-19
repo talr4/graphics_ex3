@@ -34,7 +34,7 @@ for i = 1 : size(des1,1)
       num_matches = num_matches + 1;
       match(i) = indx(1);
       dist_vals(num_matches) = vals(1) / vals(2);
-      matches(num_matches,:) = [loc1(i,2) loc1(i,1) loc2(match(i),2) loc2(match(i),1)];
+      matches(:, num_matches) = [loc1(i,2) loc1(i,1) loc2(match(i),2) loc2(match(i),1)];
    else
       match(i) = 0;
    end

@@ -1,4 +1,4 @@
-function [H] = DLT(matches)
+function [H] = DLT_V2(matches)
 
 numberOfPoints = size(matches, 2);
 
@@ -10,15 +10,18 @@ end
 [p1, T1] = normalizePoints(p1);
 [p2, T2] = normalizePoints(p2);
 
-x2 = p2(1,:);
-y2 = p2(2,:);
-z2 = p2(3,:);
+
 
 a = [];
 n =  size(p1,2);
 for i= 1 : n
-    a = [a; zeros(3,1)'     -z2(i)*p1(:,i)'   y2(i)*p1(:,i)'; ...
-            z2(i)*p1(:,i)'   zeros(3,1)'     -x2(i)*p1(:,i)'];
+    x2 = p2(1,i);
+    y2 = p2(2,i);
+    z2 = p2(3,i);
+    p = p1(:,i)';
+    zero = zeros(3,1)';
+    a(2*i-1,:) = [zero -z2*p y2*p];
+    a(2*i,:) = [z2*p zero -x2*p];
 end
 
 % Obtain the SVD of A. The unit singular vector corresponding to the
