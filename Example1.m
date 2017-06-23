@@ -8,7 +8,8 @@ displayedCorr = DisplayCorr(Im,Im_shear,matches,dist_vals,10)
 H_no_ransac = DLT(matches)
 [pnts_gt,pnts_computed] = ComputeTestPoints(H,H_no_ransac')
 error_no_ransac = ComputeError(pnts_gt,pnts_computed)
-H_ransac = RANSAC_Wrapper(matches,@DLT,@homogdist2d,@isdegenerate,4,0.005,0,100,1000)
+%H_ransac = 
+H_ransac = RANSAC_Wrapper(matches,@homography2d,@homogdist2d,@isdegenerate,4,0.1,0,100,1000)
 [pnts_gt,pnts_computed] = ComputeTestPoints(H,H_ransac')
 error_ransac = ComputeError(pnts_gt,pnts_computed)
 sprintf('DLT error: %d. DLT with RANSAC error: %d error:',error_no_ransac,error_ransac);
