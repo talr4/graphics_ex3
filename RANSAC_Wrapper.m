@@ -9,9 +9,19 @@ function [H, inliers] = ransacfithomography(matches, fittingfn, distfn, degenfn,
     [x1, T1] = normalizePoints(x1);
     [x2, T2] = normalizePoints(x2);
 
-    [H, inliers] = ransac([x1; x2], fittingfn, distfn, degenfn, s, t, feedback, maxDataTrials, maxTrials);
+    [H, inliers_indices] = ransac([x1; x2], fittingfn, distfn, degenfn, s, t, feedback, maxDataTrials, maxTrials);
     
-    H = homography2d(x1(:,inliers), x2(:,inliers));
+    inliers_matches = matches(:,inliers_indices);
+    
+    x1 = x1(:,inliers_indices);
+    x2 = x2(:,inliers_indices);
+    numberOfInliers = size(x1, 2);
+
+    for i = 1 : numberOfInliers
+        matches_inliers(:,i) = [ x1(1, i) x1(2, i) x1(3, i) x2(1,i) x2(2,i) x2(3,i) ];
+    end
+    
+    H = fittingfn(matches_inliers);
     
     % Denormalise
     H = T2\H*T1;    

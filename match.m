@@ -25,6 +25,8 @@ function [num_matches,matches,dist_vals] = match(image1, image2, distRatio)
 % For each descriptor in the first image, select its match to second image.
 des2t = des2';                          % Precompute matrix transpose
 num_matches = 0;
+matches = [];
+dist_vals = [];
 for i = 1 : size(des1,1)
    dotprods = des1(i,:) * des2t;        % Computes vector of dot products
    [vals,indx] = sort(acos(dotprods));  % Take inverse cosine and sort results

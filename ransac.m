@@ -225,6 +225,7 @@ function [M, inliers] = ransac(x, fittingfn, distfn, degenfn, s, t, feedback, ..
     if ~isnan(bestM)   % We got a solution
         M = bestM;
         inliers = bestinliers;
+        best = ind;
     else
         M = [];
         inliers = [];

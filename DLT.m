@@ -1,6 +1,6 @@
 function [H] = DLT(matches)
 
-s = size(matches)         % Extract x1 and x2 from x
+s = size(matches);        
 if (s(1,1) == 6)
     p1 = matches(1:3,:);    
     p2 = matches(4:6,:); 
@@ -15,7 +15,8 @@ end
 [x2, T2] = normalizePoints(p2);
 
 Npts = length(x1);
-a = zeros(3*Npts,9); 
+
+% construct a matrix
 O = [0 0 0];
 for n = 1:Npts
     X = x1(:,n)';
@@ -24,10 +25,6 @@ for n = 1:Npts
     a(3*n-1,:) = [ w*X   O  -x*X];
 end
 
-% Obtain the SVD of A. The unit singular vector corresponding to the
-% smallest singular value is the solucion h. A = UDV' with D diagonal with
-% positive entries, arranged in descending order down the diagonal, then h
-% is the last column of V.
 [u,d,v] = svd(a);
 
 H = reshape(v(:,9),3,3)';
