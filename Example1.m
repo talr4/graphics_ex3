@@ -20,7 +20,7 @@ H_no_ransac = DLT(matches);
 error_no_ransac = ComputeError(pnts_gt,pnts_computed);
 
 % execute RANSAC and estimate his error
-H_ransac = RANSAC_Wrapper(matches,@DLT,@homogdist2d,@isdegenerate,4,0.1,0,100,4000);
+H_ransac = RANSAC_Wrapper(matches,@DLT,@ComputeDistance,@ComputeDegenerate,4,0.1,0,100,4000);
 [pnts_gt,pnts_computed] = ComputeTestPoints(H,H_ransac');
 error_ransac = ComputeError(pnts_gt,pnts_computed);
 

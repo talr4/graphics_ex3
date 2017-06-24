@@ -20,16 +20,19 @@ H_no_ransac = DLT(matches);
 error_no_ransac = ComputeError(pnts_gt,pnts_computed);
 
 % execute RANSAC and estimate his error
-H_ransac = RANSAC_Wrapper(matches,@DLT,@homogdist2d,@isdegenerate,4,0.1,0,100,4000);
+H_ransac = RANSAC_Wrapper(matches,@DLT,@ComputeDistance,@isdegenerate,4,0.1,0,100,4000);
 [pnts_gt,pnts_computed] = ComputeTestPoints(H,H_ransac');
 error_ransac = ComputeError(pnts_gt,pnts_computed);
 
+% compute RANSAC improvment
 improvementRate = (1-(error_ransac/error_no_ransac))*100;
 if improvementRate < 0.0001 && improvementRate > -0.0001 
-    then
+    improvementRate = 0;
+end
+
 
 % print error results
 display(['DLT error without RANSAC: ' num2str(error_no_ransac) '.' ]);
 display(['DLT error with RANSAC: ' num2str(error_ransac) '.' ]);
 
-display(['Improvement rate: ' num2str((1-(error_ransac/error_no_ransac))*100) '%.' ]);
+display(['Improvement rate: ' num2str(improvementRate) '%.' ]);
