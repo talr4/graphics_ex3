@@ -4,7 +4,7 @@ function nx = hnormalise(x)
     nx = x;
     finiteind = find(abs(x(rows,:)) > eps);
 
-    % Normalise points not at infinity
+    % Normalise points 
     for r = 1:rows-1
         nx(r,finiteind) = x(r,finiteind)./x(rows,finiteind);
     end

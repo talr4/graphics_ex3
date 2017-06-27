@@ -32,6 +32,7 @@ end
 
 
 % print error results
+display(' ');
 display(['DLT error without RANSAC: ' num2str(error_no_ransac) '.' ]);
 display(['DLT error with RANSAC: ' num2str(error_ransac) '.' ]);
 

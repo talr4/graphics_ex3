@@ -5,7 +5,7 @@ im1 = imread(image1);
 im2 = imread(image2);
 image3 = appendimages(im1,im2);
 
-%insert text
+
 cols1 = size(im1,2);
 result = image3;
 [values, indexs] = sort(dist_vals);
@@ -16,7 +16,6 @@ for i = 1 : x
    displayedCorr(i) = matches(i);
 end
 
-%show the image
 figure('Position', [100 100 size(result,2) size(result,1)]);
 imshow(result);
 

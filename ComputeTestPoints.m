@@ -1,5 +1,5 @@
 function [pnts_gt,pnts_computed] = ComputeTestPoints(H_gt,H_computed)
-X = []
+X = [];
 for i = 1:100
     for j = 1:100
         X = [X [i j 1]'];
